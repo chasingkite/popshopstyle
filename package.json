@@ -1,0 +1,28 @@
+{
+  "name": "popshopstyle",
+  "version": "0.1.0",
+  "description": "popshopstyle nodejs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "2.3.3",
+    "express": "4.13.3",
+    "jade": "^1.11.0"
+  },
+  "engines": {
+    "node": "0.12.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hnguyen417/popshopstyle.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express",
+    "popshopstyle"
+  ],
+  "license": "MIT"
+}
