@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "description": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 500
+        },
+        "location": {
+            "type": "object",
+            "required": [
+                "lat",
+                "lon"
+            ],
+            "properties": {
+                "lat": {
+                    "type": "number"
+                },
+                "lon": {
+                    "type": "number"
+                }
+            }
+        },
+        "autoPost": {
+            "type": "object",
+            "properties": {
+                "google": {
+                    "type": "boolean"
+                },
+                "facebook": {
+                    "type": "boolean"
+                },
+                "twitter": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}

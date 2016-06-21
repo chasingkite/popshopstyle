@@ -1,0 +1,54 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "caption": {
+            "type": "string"
+        },
+        "tags": {
+            "type": "array"
+        },
+        "attributes": {
+            "type": "object",
+            "properties": {
+                "ownCopyright": {
+                    "type": "boolean"
+                },
+                "usageRights": {
+                    "type": "string"
+                },
+                "allowedUse": {
+                    "type": "string"
+                },
+                "mature": {
+                    "type": "boolean"
+                },
+                "watermark": {
+                    "type": "boolean"
+                },
+                "location": {
+                    "type": "object",
+                    "required": [
+                        "lat",
+                        "lon"
+                    ],
+                    "properties": {
+                        "lat": {
+                            "type": "number",
+                            "minimum": -90,
+                            "maximum": 90
+                        },
+                        "lon": {
+                            "type": "number",
+                            "minimum": -180,
+                            "maximum": 180
+                        },
+                        "alt": {
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
