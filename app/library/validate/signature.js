@@ -39,7 +39,7 @@ let config = require('../../config'),
             clientSignature = req.get('authorization').slice(54, 98),
             dataToHash = (Object.keys(req.body).length) ? JSON.stringify(req.body) : req.originalUrl,
             md5Checksum = crypto.hash(dataToHash, 'md5', 'hex'),
-            signatureString = util.format('%s.%s.%s.%s', req.method, req.originalUrl, md5Checksum, clientTime),
+            signatureString = util.format('%s|%s|%s|%s', req.method, req.originalUrl, md5Checksum, clientTime),
             signature = crypto.hmac(signatureString, 'sha256', 'base64', session.secret);
 
         if (signature === clientSignature) {

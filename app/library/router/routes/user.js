@@ -26,14 +26,15 @@ module.exports = (router, control) => {
      * Login and logout.
      */
     router.route('/users/auth')
-        .post(v.headers, v.auth.login, control.auth.login) //.post(v.headers, v.profile.create, control.create)
+        .post(v.headers, v.auth.login, control.auth.login)
         .delete(control.auth.logout);
 
     /**
      * CRUD -Minus the C since it's only possible to login via FB, for now.
      */
-    router.route('/users/:username?')
-        .get(control.read)
+    router.get('/users/:username', control.read);
+    router.route('/users')
+        .get(control.readAll)
         .put(v.headers, v.profile.update, control.update)
         .delete(control.delete);
 

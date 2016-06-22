@@ -37,8 +37,7 @@ module.exports = (error, req, res, next) => {
     res.status(status).send({
         status: status,
         code: code,
-        message: errors[status][code],
-        trace: error.message
+        message: errors[status][code] || error.message,
     });
 
     error = null;

@@ -22,7 +22,7 @@
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "express": "^4.14.0",
-    "fbgraph": "^1.2.0",
+    "fb": "^1.1.1",
     "flat": "^2.0.0",
     "hashids": "^1.0.2",
     "mandrill-api": "^1.0.45",

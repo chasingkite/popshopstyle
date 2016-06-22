@@ -5,8 +5,9 @@ let config = require('../config'),
     url = require('url'),
     redis = require('redis'),
     redisURL = url.parse(config.redis.url),
+    redisPass = redisURL.auth.split(':')[1],
     redisClient = redis.createClient(redisURL.port, redisURL.hostname, { no_ready_check: true }),
-    storageKey = () => {
+    storageKey = function redis$storageKey() {
         let argIndex,
             finalKey = [config.redis.keyPrefix];
 
@@ -27,7 +28,9 @@ let config = require('../config'),
         return config.redis.keyExpiration;
     };
 
-redisClient.auth(redisURL.auth.split(':')[1]);
+if (redisPass) {
+    redisClient.auth(redisPass);
+}
 module.exports = {
 
     client: redisClient,

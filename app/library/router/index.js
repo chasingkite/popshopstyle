@@ -2,8 +2,28 @@
 
 
 let fs = require('fs'),
+    id = require('../../library/id'),
     routeGuard = require('./routeGuard'),
     validate = require('../validate'),
+    paging = function paging(req, res, next) {
+
+        req.items = Math.abs(req.query.items);
+        req.items = req.items <= 50 ? parseInt(req.items, 10) : 10;
+        req.sort = { '_id': 'desc' };
+
+        req.span = null;
+        let before = req.query.before && id.decode(req.query.before) || null,
+            after = req.query.after && id.decode(req.query.after) || null;
+
+        if (before) {
+            req.span = { $lt: before };
+        } else if (after) {
+            req.span = { $gt: after };
+            req.sort = { '_id': 'asc' };
+        }
+
+        return next();
+    },
     appRouter = {
 
         /**
@@ -19,6 +39,7 @@ let fs = require('fs'),
             let schemaPath = __dirname + '/routes/',
                 control = __dirname + '/../../mvc/controllers/';
 
+            router.route('*').get(paging);
             router.use(routeGuard.check);
             router.use(validate.sanitizeBody);
             router.unlockRoutes = routeGuard.unlockRoutes;

@@ -31,5 +31,5 @@ app.route('/').get((req, res) => {
 });
 
 app.listen(apiPort, () => {
-    console.log('Up on port:', apiPort);
+    console.log(`Up on port: ${apiPort}`);
 });

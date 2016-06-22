@@ -3,29 +3,33 @@
 
 let id = require('../../../library/id'),
     imageHelper = require('./image'),
+    query = require('querystring'),
     format = {
 
-        user: user => {
+        user: (user, currentSession) => {
 
+            user.userId = id.encode(user._id);
             user.dateOfBirth = user.dateOfBirth && Math.floor(new Date(user.dateOfBirth) / 1000);
             user.meta = user.meta && {
                 memberSince: Math.floor(new Date(user.meta.memberSince) / 1000),
                 lastLogin: Math.floor(new Date(user.meta.lastLogin) / 1000)
             };
 
+            if (currentSession && (user._id.toString() !== currentSession.userId)) {
+                user.email = undefined;
+            }
+
             user._id = undefined;
-            user.email = undefined;
-            user.password = undefined;
             user.notifications = undefined;
             user.socialAccounts = undefined;
 
             return user;
         },
 
-        users: users => {
+        users: (users, currentSession) => {
 
             for (let user = 0; user < users.length; user += 1) {
-                users[user] = format.user(users[user]);
+                users[user] = format.user(users[user], currentSession);
             }
 
             return users;
@@ -57,6 +61,19 @@ let id = require('../../../library/id'),
             }
 
             return images;
+        },
+
+        paging: (span, req, data, property) => {
+
+            delete req.query.before;
+            delete req.query.after;
+
+            let myQuery = Object.assign({}, req.query);
+            if (data.length) {
+                myQuery[span] = span === 'before' ? data[0][property] : data[data.length - 1][property];
+            }
+
+            return req.baseUrl + req.path + '?' + query.stringify(myQuery);
         }
     };
 

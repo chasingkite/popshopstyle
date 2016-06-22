@@ -54,12 +54,17 @@ let ajv = require('ajv')({
 
                 if (!valid) {
                     let error = validate.errors[0];
-                    if (error.dataPath === '.password' && (error.keyword === 'minLength' || error.keyword === 'maxLength')) {
-                        return next({ status: 400, code: 13, message: error });
-                    }
 
                     if (error.dataPath === '.username' && (error.keyword === 'minLength' || error.keyword === 'maxLength')) {
                         return next({ status: 400, code: 16, message: error });
+                    }
+
+                    if (error.dataPath === '.email') {
+                        return next({ status: 400, code: 17, message: error });
+                    }
+
+                    if (error.dataPath === '.facebookToken') {
+                        return next({ status: 400, code: 17, message: error });
                     }
                 }
 
@@ -68,34 +73,6 @@ let ajv = require('ajv')({
         },
 
         profile: {
-
-            create: (req, res, next) => {
-
-                let schema = require('./schemas/user/create.json'),
-                    validate = ajv.compile(schema),
-                    valid = validate(req.body);
-
-                if (!valid) {
-                    let error = validate.errors[0];
-                    if (error.dataPath === '.password' && (error.keyword === 'minLength' || error.keyword === 'maxLength')) {
-                        return next({ status: 400, code: 13, message: error });
-                    }
-
-                    if (error.dataPath === '.username' && (error.keyword === 'minLength' || error.keyword === 'maxLength')) {
-                        return next({ status: 400, code: 16, message: error });
-                    }
-
-                    if (error.dataPath === '.email' && error.keyword === 'format') {
-                        return next({ status: 400, code: 17, message: error });
-                    }
-
-                    if (error.dataPath === '.avatar' && error.keyword === 'format') {
-                        return next({ status: 400, code: 19, message: error });
-                    }
-                }
-
-                return next();
-            },
 
             update: (req, res, next) => {
 
