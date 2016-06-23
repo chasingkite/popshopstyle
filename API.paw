@@ -5,7 +5,7 @@
     <databaseInfo>
         <version>134481920</version>
         <UUID>AFBE4DC7-D570-47A2-AF40-5B3DE9AFE9EC</UUID>
-        <nextObjectID>168</nextObjectID>
+        <nextObjectID>172</nextObjectID>
         <metadata>
             <plist version="1.0">
                 <dict>
@@ -240,7 +240,7 @@
         <attribute name="order" type="int64">1</attribute>
         <attribute name="name" type="string">Profile</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM" idrefs="z146 z160 z157 z164"></relationship>
+        <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM" idrefs="z146 z169 z160 z157 z164"></relationship>
         <relationship name="bodyparameters" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="headers" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="urlparameters" type="0/0" destination="LMKEYVALUE"></relationship>
@@ -314,7 +314,7 @@
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">POST</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="body" type="string">[{"data":{"json":"{\\"username\\":\\"shopqueen\\",\\"email\\":\\"shopqueen@popshop.com\\",\\"facebookToken\\":\\"EAACEdEose0cBAHzUbg7QgztP6HMfDZAVmeZChRZARebzHmBbLYBExVns84yQKsUE7ODvo9nWOczIuZBiDCZByO2ezuXFu8C6lgXRJ1BMGQIXVxQZCkkRY8xDTrxubiG9ZCepRfqek102QG9Jw763fpOOLQ7yzFZCOne4mUn13ufKlQZDZD\\"}"},"identifier":"com.luckymarmot.JSONDynamicValue"}]</attribute>
+        <attribute name="body" type="string">[{"data":{"json":"{\\"username\\":\\"shopqueen\\",\\"email\\":\\"shopqueen@popshop.com\\",\\"facebookToken\\":\\"EAACEdEose0cBAGBs7RGy4qqwn3ZCawPZCfinsP3OAmZC6MCUOQ5kOrrjbXHocuMCVZBhcifFxpNVZBxTtNJ6wlhP3tCFpoHxFWIzijxNiXayqZA9so4Sx1VPPfl9DsYcGwsMYoIlz6j37J30mmiQUgDssjN2k0m4g8iwrgdNkwawZDZD\\"}"},"identifier":"com.luckymarmot.JSONDynamicValue"}]</attribute>
         <attribute name="order" type="int64">0</attribute>
         <attribute name="name" type="string">Login</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z168"></relationship>
@@ -507,5 +507,52 @@
         <relationship name="bodyparameters" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="headers" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="urlparameters" type="0/0" destination="LMKEYVALUE"></relationship>
+    </object>
+    <object type="LMREQUEST" id="z169">
+        <attribute name="uuid" type="string">D592B3A0-781A-4374-8701-76553FF863FD</attribute>
+        <attribute name="url" type="string">[{"data":{"environmentVariable":"9555E0FC-1653-40C2-A330-DA8DC32A4DDB"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/v1\\/users"]</attribute>
+        <attribute name="timeoutinterval" type="float">3</attribute>
+        <attribute name="storecookies" type="bool">1</attribute>
+        <attribute name="sendcookies" type="bool">1</attribute>
+        <attribute name="redirectmethod" type="bool">0</attribute>
+        <attribute name="redirectauthorization" type="bool">0</attribute>
+        <attribute name="method" type="string">DELETE</attribute>
+        <attribute name="followredirects" type="bool">0</attribute>
+        <attribute name="body" type="string"></attribute>
+        <attribute name="order" type="int64">4</attribute>
+        <attribute name="name" type="string">Delete</attribute>
+        <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z135"></relationship>
+        <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z172 z171 z170"></relationship>
+    </object>
+    <object type="LMKEYVALUE" id="z170">
+        <attribute name="value" type="string"></attribute>
+        <attribute name="order" type="int64">2</attribute>
+        <attribute name="name" type="string"></attribute>
+        <attribute name="enabled" type="bool">1</attribute>
+        <relationship name="groupforbodyparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforheaders" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z169"></relationship>
+    </object>
+    <object type="LMKEYVALUE" id="z171">
+        <attribute name="value" type="string">[{"data":{"token":"WcU4wCJPoQ8twOxXZCospBebu8ohcB7p3XIvuHh7kBU=","secret":"IEKqRkqgD3GBhlsrUvPuMQG85h+iGdHsNwGEC4vWklc8cziFcdI7KE4bTUkatGW9c3kU\\/KHFbI2zdabOpVQ0jg=="},"identifier":"com.popshop.PawExtensions.PSAuthDynamicValue"}]</attribute>
+        <attribute name="order" type="int64">1</attribute>
+        <attribute name="name" type="string">Authorization</attribute>
+        <attribute name="enabled" type="bool">1</attribute>
+        <relationship name="groupforbodyparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforheaders" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z169"></relationship>
+    </object>
+    <object type="LMKEYVALUE" id="z172">
+        <attribute name="value" type="string">application/json</attribute>
+        <attribute name="order" type="int64">0</attribute>
+        <attribute name="name" type="string">Content-Type</attribute>
+        <attribute name="enabled" type="bool">1</attribute>
+        <relationship name="groupforbodyparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforheaders" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z169"></relationship>
     </object>
 </database>

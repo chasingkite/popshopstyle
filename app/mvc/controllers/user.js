@@ -22,7 +22,10 @@ module.exports = {
                     return next(fbUser.error);
                 }
 
-                m.user.findOne({ 'socialAccounts.facebook.userId': fbUser.id })
+                m.user.findOne({
+                        'socialAccounts.facebook.userId': fbUser.id,
+                        'meta.status': 'active'
+                    })
                     .lean()
                     .exec()
                     .then(user => {
@@ -136,26 +139,38 @@ module.exports = {
 
     delete: (req, res, next) => {
 
-        /**
-         * TODO
-         */
-        m.user.delete(req.currentSession.userId, (error, user) => {
-            if (error) {
-                return next(error);
+        let account = m.user
+            .findOneAndUpdate(
+                { username: req.currentSession.username },
+                {
+                    'meta': {
+                        status: 'deleted',
+                        deletedOn: Date.now()
+                    }
+                }
+            )
+            .lean()
+            .exec();
+
+        account.then(user => {
+            if (!user) {
+                throw new Error({ code: 11 });
             }
 
             /**
              * "Sorry to see you go" email notification.
-             */
+             *
             mandrill.accountEmail({
                 email: user.email,
                 username: user.username,
                 type: 'goodbye'
             });
+             */
 
-            redis.flushSessions(req.currentSession);
-            res.status(200).end();
-        });
+            userHelper.flushSessions(req.currentSession).then(() => {
+                res.status(200).end();
+            });
+        }).catch(next);
     },
 
     settings: {

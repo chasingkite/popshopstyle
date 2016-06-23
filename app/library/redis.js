@@ -41,6 +41,7 @@ module.exports = {
 
     flushSessions: session => {
 
+        redisClient.del(storageKey('HITS', session.token));
         redisClient.del(storageKey(session.token));
     }
 };

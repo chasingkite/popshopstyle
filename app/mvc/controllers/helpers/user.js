@@ -83,5 +83,15 @@ module.exports = {
 
     session: session,
 
+    flushSessions: session => {
+
+        return new Promise ((yes) => {
+            m.userSession.remove({ user: session.userId }, () => {
+                redis.flushSessions(session);
+                yes();
+            });
+        });
+    },
+
     getId: getId
 };
