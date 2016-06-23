@@ -1,20 +1,34 @@
 'use strict';
 
 
-var flat = require('flat');
+let flat = require('flat'),
+    setEmptyToNull = data => {
+        for (let k = 0; k < Object.keys(data).length; k += 1) {
+            let property = Object.keys(data)[k];
+            if (data.hasOwnProperty(property)) {
+                if (typeof data[property] === 'object' && data[property] !== null) {
+                    setEmptyToNull(data[property]);
+                } else if (!data[property]) {
+                    data[property] = null;
+                }
+            }
+        }
+    };
 
 module.exports = mongoose => {
 
-    var Schema = mongoose.Schema,
+    let Schema = mongoose.Schema,
         schema = new Schema(
             {
                 username: {
                     type: String,
+                    trim: true,
                     lowercase: true,
                     required: true
                 },
                 email: {
                     type: String,
+                    trim: true,
                     lowercase: true,
                     required: true
                 },
@@ -28,15 +42,17 @@ module.exports = mongoose => {
                 },
                 gender: {
                     type: String,
-                    default: ''
+                    default: null
                 },
                 name: {
                     first: {
                         type: String,
+                        trim: true,
                         default: ''
                     },
                     last: {
                         type: String,
+                        trim: true,
                         default: ''
                     }
                 },
@@ -90,6 +106,16 @@ module.exports = mongoose => {
      * correctly updated instead of overwriting the parent object.
      */
     schema.pre('findOneAndUpdate', function () {
+
+        if (this._update.dateOfBirth) {
+            this._update.dateOfBirth = parseInt(this._update.dateOfBirth, 10) * 1000;
+        }
+
+        if (this._update.name && !Object.keys(this._update.name).length) {
+            delete this._update.name;
+        }
+
+        setEmptyToNull(this._update);
         this._update = flat(this._update);
     });
 

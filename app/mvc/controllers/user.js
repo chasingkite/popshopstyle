@@ -4,21 +4,7 @@
 let fb = require('fb'),
     m = require('../models'),
     format = require('./helpers/format'),
-    userHelper = require('./helpers/user'),
-    deNull = data => {
-        for (let k = 0; k < Object.keys(data).length; k += 1) {
-            let property = Object.keys(data)[k];
-            if (data.hasOwnProperty(property)) {
-                if (typeof data[property] === 'object' && data[property] !== null) {
-                    deNull(data[property]);
-                } else if (data[property] === null) {
-                    data[property] = '';
-                }
-            }
-        }
-
-        return data;
-    };
+    userHelper = require('./helpers/user');
 
 module.exports = {
 
@@ -114,7 +100,7 @@ module.exports = {
             }
 
             format.users(users, req.currentSession);
-            if (req.span.$gt) {
+            if (req.span && req.span.$gt) {
                 users.reverse();
             }
             res.send({
@@ -127,23 +113,17 @@ module.exports = {
 
     update: (req, res, next) => {
 
-        let options = {
-            new: true,
-            runValidators: true
-        };
-
-        if (req.body.dateOfBirth === null) {
-            options.$unset = { 'dateOfBirth': '' };
-            delete req.body.dateOfBirth;
-        } else if (req.body.dateOfBirth) {
-            req.body.dateOfBirth = parseInt(req.body.dateOfBirth) * 1000;
-        }
-
-        /**
-         * req.internalQuery, for internal use only gets set on account.activate()
-         */
-        let query = req.internalQuery || { username: req.currentSession.username },
-            account = m.user.findOneAndUpdate(query, deNull(req.body), options).lean().exec();
+        let account = m.user
+            .findOneAndUpdate(
+                { username: req.currentSession.username },
+                req.body,
+                {
+                    new: true,
+                    runValidators: true
+                }
+            )
+            .lean()
+            .exec();
 
         account.then(user => {
             if (!user) {

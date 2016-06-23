@@ -37,7 +37,7 @@
         },
         "gender": {
             "anyOf": [
-                { "type": "string", "enum": ["male", "female"] },
+                { "type": "string", "enum": ["male", "female", ""] },
                 { "type": "null" }
             ]
         },

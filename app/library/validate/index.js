@@ -82,10 +82,6 @@ let ajv = require('ajv')({
 
                 if (!valid) {
                     let error = validate.errors[0];
-                    console.log(error);
-                    if (error.dataPath === '.password' && (error.keyword === 'minLength' || error.keyword === 'maxLength')) {
-                        return next({ status: 400, code: 13, message: error });
-                    }
 
                     if (error.dataPath === '.email' && error.keyword === 'format') {
                         return next({ status: 400, code: 17, message: error });
@@ -93,10 +89,6 @@ let ajv = require('ajv')({
 
                     if (error.dataPath === '.avatar' && error.keyword === 'format') {
                         return next({ status: 400, code: 19, message: error });
-                    }
-
-                    if (error.dataPath === '.url' && error.keyword === 'format') {
-                        return next({ status: 400, code: 20, message: error });
                     }
 
                     if (error.dataPath === '.gender' && error.keyword === 'enum') {

@@ -19,6 +19,9 @@ require('util').inherits(module.exports, Error);
 
 module.exports = (error, req, res, next) => {
 
+    // For dev & test only
+    console.log(error);
+
     let status = error.status || 404,
         code = error.code || 10;
 
