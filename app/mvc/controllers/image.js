@@ -4,84 +4,64 @@
 let model = require('../models'),
     id = require('../../library/id'),
     format = require('./helpers/format'),
-    imageHelper = require('./helpers/image'),
-    image = {
+    imageHelper = require('./helpers/image');
 
-        get: (req, modelMethods) => {
+module.exports = {
 
-            let image = model.image.findOne({ _id: id.decode(req.params.imageId) });
-            image = modelMethods ? image : image.lean();
+    signature: (req, res, next) => {
 
-            return image.exec();
-        },
+        imageHelper.uploadSignature(req.currentSession).then(image => {
+            res.send(image);
+        }).catch(next);
+    },
 
-        signature: (req, res, next) => {
+    create: (req, res, next) => {
 
-            imageHelper.uploadSignature(req.currentSession, { expires: 30 }).then(image => {
-                image.imageId = id.encode(image.imageId);
-                res.send(image);
-            }).catch(next);
-        },
+        req.body.owner = req.currentSession.userId;
+        model.image.create(req.body).then(image => {
+            res.send({
+                imageId: id.encode(image._id),
+                url: `http://media.popshop.style/${req.currentSession.username}/${req.body.fileName}`
+            });
+        }).catch(next);
+    },
 
-        update: (req, res, next) => {
+    read: (req, res, next) => {
 
-            /**
-             * Brags are actually created on signature registration.
-             * An actual brag update is not possible, hence only 'pending' brags
-             * may be operated on via this end-point.
-             */
-            let image = model.image.findOne({ _id: id.decode(req.body.imageId), 'meta.status': 'image.pending' }).exec();
-            image.then(image => {
-
-                image = imageHelper.prepare(image, req.body);
-                image.save(error => {
-                    if (error) {
-                        throw new Error(error);
-                    }
-
-                    res.send({ imageId: id.encode(image._id) });
-                });
-            }).catch(next);
-        },
-
-        read: (req, res, next) => {
-
-            let image = model.image.findOne({ _id: id.decode(req.params.imageId) })
-                .select('-tags -mentions')
-                .populate([
-                    {
-                        path: 'author',
-                        select: 'username about avatar tally'
-                    }
-                ])
-                .lean()
-                .exec();
-
-            image.then(image => {
-                if (!image) {
-                    throw new Error({ code: 12 });
+        let image = model.image.findOne({ _id: id.decode(req.params.imageId) })
+            .select('-tags -mentions')
+            .populate([
+                {
+                    path: 'author',
+                    select: 'username about avatar tally'
                 }
+            ])
+            .lean()
+            .exec();
 
-                return imageHelper.getComments(image);
-            }).then(image => {
-                res.send(format.image(image));
-            }).catch(next);
-        },
+        image.then(image => {
+            if (!image) {
+                throw new Error({ code: 12 });
+            }
 
-        delete: (req, res, next) => {
+            return imageHelper.getComments(image);
+        }).then(image => {
+            res.send(format.image(image));
+        }).catch(next);
+    },
 
-            // TODO: Create a kue to delete images from S3 and the CDN
-            let image = model.image.findOne({ _id: id.decode(req.params.imageId) }).exec();
-            image.then(image => {
-                if (!image) {
-                    throw new Error({ code: 12 });
-                }
+    delete: (req, res, next) => {
 
-                return image.remove();
-            }).then(() => {
-                res.status(200).end();
-            }).catch(next);
-        }
-    };
+        // TODO: Create a kue to delete images from S3 and the CDN
+        let image = model.image.findOne({ _id: id.decode(req.params.imageId) }).exec();
+        image.then(image => {
+            if (!image) {
+                throw new Error({ code: 12 });
+            }
 
-module.exports = image;
+            return image.remove();
+        }).then(() => {
+            res.status(200).end();
+        }).catch(next);
+    }
+};

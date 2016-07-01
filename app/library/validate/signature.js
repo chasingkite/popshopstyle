@@ -42,6 +42,8 @@ let config = require('../../config'),
             signatureString = util.format('%s|%s|%s|%s', req.method, req.originalUrl, md5Checksum, clientTime),
             signature = crypto.hmac(signatureString, 'sha256', 'base64', session.secret);
 
+        console.log(dataToHash);
+
         if (signature === clientSignature) {
             req.currentSession = {
                 userId: session.user._id.toString(),
@@ -88,7 +90,7 @@ let config = require('../../config'),
                             }
 
                             if (!session) {
-                                return next({ status: 403, code: 13 });
+                                return next({ status: 403, code: 10 });
                             }
 
                             computeSignature(session, req, next);

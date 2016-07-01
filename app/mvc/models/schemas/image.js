@@ -1,24 +1,35 @@
 'use strict';
 
 
-var flat = require('flat');
+let flat = require('flat');
 
 module.exports = mongoose => {
 
-    var Schema = mongoose.Schema,
+    let Schema = mongoose.Schema,
         schema = new Schema(
             {
-                author: {
+                owner: {
                     type: Schema.Types.ObjectId,
                     ref: 'User',
                     required: true
                 },
                 description: {
-                    type: String
-                },
-                image: {
                     type: String,
-                    default: ''
+                    default: '',
+                    trim: true
+                },
+                fileName: {
+                    type: String,
+                    default: '',
+                    trim: true
+                },
+                attributes: {
+                    price: {
+                        type: Number
+                    },
+                    style: [String],
+                    colors: [String],
+                    sizes: [String]
                 },
                 location: {
                     type: {
@@ -26,14 +37,7 @@ module.exports = mongoose => {
                     },
                     coordinates: [Number]
                 },
-                tally: {
-                    respect: {
-                        type: Number,
-                        default: 0
-                    }
-                },
                 tags: [String],
-                mentions: [String],
                 meta: {
                     status: {
                         type: String,
@@ -65,7 +69,7 @@ module.exports = mongoose => {
         );
 
     /**
-     * Since MongoDB does not allow empty coordinates, this pre-hook just unsets the
+     * Since MongoDB does not allow empty coordinates, this pre-hook just "unsets" the
      * whole property in case no coordinates where given.
      */
     schema.pre('save', function (next) {
@@ -85,5 +89,5 @@ module.exports = mongoose => {
     });
 
 
-    return mongoose.model('Brag', schema, 'brags');
+    return mongoose.model('Image', schema, 'images');
 };

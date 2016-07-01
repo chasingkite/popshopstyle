@@ -3,7 +3,7 @@
 
 let config = require('../config'),
     Hashids = require('hashids'),
-    hashids = new Hashids(config.keys.api, 18);
+    hashids = new Hashids(config.keys.api, config.hashLength);
 
 module.exports = {
 

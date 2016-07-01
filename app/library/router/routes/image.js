@@ -24,10 +24,10 @@ module.exports = (router, control) => {
     router.get('/images/signature', control.signature);
 
     /**
-     * CRUD -Minus the U, which -in this case- is actually C.
+     * CRUD -Minus the U.
      */
     router.route('/images/:imageId?')
-        .put(v.headers, control.update)
+        .post(v.headers, v.image.create, control.create)
         .get(control.read)
         .delete(control.delete);
 

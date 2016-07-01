@@ -4,7 +4,6 @@
 let aws = require('aws-sdk'),
     config = require('../../../config'),
     crypto = require('../../../library/crypto'),
-    model = require('../../models'),
     uuid = require('node-uuid'),
     querystring = require('querystring'),
     processCoordinates = coordinates => {
@@ -25,33 +24,30 @@ let aws = require('aws-sdk'),
 
 module.exports = {
 
-    uploadSignature: (user, options) => {
+    uploadSignature: (user) => {
 
         return new Promise ((yes, no) => {
 
             aws.config = config.aws;
-            let S3 = new aws.S3(),
+            let S3 = new aws.S3(), //{ endpoint: config.urls.upload, s3BucketEndpoint: true }
                 fileName = uuid.v4() + '.jpg',
                 params = {
                     Bucket: config.aws.bucket,
                     Key: user.username + '/' + fileName,
                     ContentType: 'image/jpeg',
-                    Expires: options && options.expire ? options.expire : 30
+                    Expires: config.aws.uploadExpiration
                 };
 
-            S3.getSignedUrl('putObject', params, (error, url) => {
+            S3.getSignedUrl('putObject', params, function (error, url) {
                 if (error) {
                     return no({ status: 500, code: 10, message: error });
                 }
 
-                let image = {
-                    author: user.userId,
+                yes({
+                    token: crypto.hmac(fileName, 'md5'),
                     fileName: fileName,
-                    'meta.status': 'image.pending'
-                };
-                model.image.create(image).then(image => {
-                    yes({ imageId: image._id, uploadUrl: url });
-                }).catch(no);
+                    uploadUrl: url
+                });
             });
         });
     },
@@ -71,7 +67,7 @@ module.exports = {
         image.meta.status = 'active';
 
         /**
-         * @see pre.save() in model.brag.
+         * @see pre.save() in model.image.
          */
         let coordinates = processCoordinates(body.location);
         if (coordinates) {

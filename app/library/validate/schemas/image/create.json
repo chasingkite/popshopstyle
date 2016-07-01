@@ -1,40 +1,58 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "type": "object",
-    "properties": {
-        "description": {
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "required": [
+    "token",
+    "fileName",
+    "attributes"
+  ],
+  "properties": {
+    "token": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fileName": {
+      "type": "string",
+      "minLength": 40,
+      "maxLength": 40
+    },
+    "attributes": {
+      "type": "object",
+      "required": [
+        "price",
+        "style",
+        "colors",
+        "sizes"
+      ],
+      "properties": {
+        "price": {
+          "type": "integer"
+        },
+        "style": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
             "type": "string",
-            "minLength": 0,
-            "maxLength": 500
+            "minLength": 1
+          }
         },
-        "location": {
-            "type": "object",
-            "required": [
-                "lat",
-                "lon"
-            ],
-            "properties": {
-                "lat": {
-                    "type": "number"
-                },
-                "lon": {
-                    "type": "number"
-                }
-            }
+        "colors": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         },
-        "autoPost": {
-            "type": "object",
-            "properties": {
-                "google": {
-                    "type": "boolean"
-                },
-                "facebook": {
-                    "type": "boolean"
-                },
-                "twitter": {
-                    "type": "boolean"
-                }
-            }
+        "sizes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
+      }
     }
+  }
 }
