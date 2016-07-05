@@ -134,7 +134,6 @@ let ajv = require('ajv')({
                 if (!valid) {
                     let error = validate.errors[0];
                     return next({ status: 400, code: 19, message: error });
-                    console.log(error);
                 }
 
                 return next();

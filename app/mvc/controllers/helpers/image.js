@@ -55,7 +55,7 @@ module.exports = {
     downloadUrl: (image, size) => {
 
         let domain = config.urls.cdn,
-            url = '/' + image.author.username + '/' + image.fileName + '?' + querystring.stringify(size),
+            url = `/${image.owner.username}/${image.fileName}` + ((size) ? '?' : '') + querystring.stringify(size),
             signature = crypto.hmac(domain.replace(/https?:\/\//i, '') + url, 'sha1', 'hex', config.keys.cometa);
 
         return domain + '/' + signature + url;

@@ -28,26 +28,23 @@ module.exports = {
 
     read: (req, res, next) => {
 
-        let image = model.image.findOne({ _id: id.decode(req.params.imageId) })
-            .select('-tags -mentions')
+        model.image.findOne({ _id: id.decode(req.params.imageId) })
+            .select('-meta -tags')
             .populate([
                 {
-                    path: 'author',
-                    select: 'username about avatar tally'
+                    path: 'owner',
+                    select: 'username'
                 }
             ])
             .lean()
-            .exec();
+            .exec().
+            then(image => {
+                if (!image) {
+                    throw new Error({ code: 12 });
+                }
 
-        image.then(image => {
-            if (!image) {
-                throw new Error({ code: 12 });
-            }
-
-            return imageHelper.getComments(image);
-        }).then(image => {
-            res.send(format.image(image));
-        }).catch(next);
+                res.send(format.image(image));
+            }).catch(next);
     },
 
     delete: (req, res, next) => {

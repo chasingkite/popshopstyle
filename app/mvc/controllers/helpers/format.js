@@ -38,17 +38,17 @@ let id = require('../../../library/id'),
         image: image => {
 
             image.imageId = id.encode(image._id);
-            image.url = {
-                thumb: imageHelper.downloadUrl(image, { w: 150, h: 150 }),
-                small: imageHelper.downloadUrl(image, { w: 300, h: 300 }),
-                medium: imageHelper.downloadUrl(image, { w: 450, h: 450 }),
-                large: imageHelper.downloadUrl(image, { w: 610, h: 610 })
+            image.urls = imageHelper.downloadUrl(image);
+            /*{
+                thumb: imageHelper.downloadUrl(image, { w: 200, h: 200 }),
+                small: imageHelper.downloadUrl(image, { w: 480, h: 480 }),
+                medium: imageHelper.downloadUrl(image, { w: 640, h: 640 }),
+                large: imageHelper.downloadUrl(image, { w: 1080, h: 1080 })
             };
-            image.meta = {
-                createdOn: Math.floor(new Date(image.meta.createdOn) / 1000)
-            };
+            */
 
             image._id = undefined;
+            image.owner = undefined;
 
             return image;
         },

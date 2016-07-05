@@ -25,7 +25,8 @@ module.exports = mongoose => {
                 },
                 attributes: {
                     price: {
-                        type: Number
+                        type: Number,
+                        required: true
                     },
                     style: [String],
                     colors: [String],
@@ -33,7 +34,8 @@ module.exports = mongoose => {
                 },
                 location: {
                     type: {
-                        type: String
+                        type: String,
+                        required: true
                     },
                     coordinates: [Number]
                 },

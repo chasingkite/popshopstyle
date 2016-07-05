@@ -5,7 +5,7 @@
     <databaseInfo>
         <version>134481920</version>
         <UUID>AFBE4DC7-D570-47A2-AF40-5B3DE9AFE9EC</UUID>
-        <nextObjectID>183</nextObjectID>
+        <nextObjectID>187</nextObjectID>
         <metadata>
             <plist version="1.0">
                 <dict>
@@ -240,7 +240,7 @@
         <attribute name="order" type="int64">2</attribute>
         <attribute name="name" type="string">Images</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM" idrefs="z183 z142 z137"></relationship>
+        <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM" idrefs="z185 z137 z142 z183"></relationship>
         <relationship name="bodyparameters" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="headers" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="urlparameters" type="0/0" destination="LMKEYVALUE"></relationship>
@@ -256,10 +256,10 @@
         <attribute name="method" type="string">GET</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
         <attribute name="order" type="int64">0</attribute>
-        <attribute name="name" type="string">Signed upload URL</attribute>
+        <attribute name="name" type="string">Upload URL</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z136"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z112 z130"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z130 z112"></relationship>
     </object>
     <object type="LMREQUEST" id="z139">
         <attribute name="uuid" type="string">B142DB78-F107-42CB-ADB6-BEE6A7ABC841</attribute>
@@ -289,10 +289,10 @@
         <attribute name="followredirects" type="bool">1</attribute>
         <attribute name="body" type="string">["{\\"fileName\\":\\"037fe1d9-5575-4e76-a024-542af1807027.jpg\\",\\"description\\":\\"This is just an image of my trips around the world\\",\\"attributes\\":{\\"sizes\\":[\\"small\\",\\"medium\\",\\"large\\"],\\"style\\":[\\"classic\\",\\"contemporary\\"],\\"colors\\":[\\"red\\",\\"white\\",\\"blue\\"],\\"price\\":3500},\\"token\\":\\"1tLQupsUQLbbkZowqndhqg==\\"}"]</attribute>
         <attribute name="order" type="int64">2</attribute>
-        <attribute name="name" type="string">Create image</attribute>
+        <attribute name="name" type="string">Create</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z136"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z117 z120 z123"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z123 z117 z120"></relationship>
     </object>
     <object type="LMREQUEST" id="z143">
         <attribute name="uuid" type="string">9494B4D2-740C-4780-A879-7D2472324431</attribute>
@@ -670,9 +670,56 @@
         <attribute name="followredirects" type="bool">0</attribute>
         <attribute name="body" type="string">[{"data":{"bookmarkData":"Ym9va0wDAAAAAAQQMAAAAPiisRsaYni4TCLg2D2oWo1oPriyFZpKSQ01hj0wV+mrSAIAAAQAAAADAwAAABgAKAUAAAABAQAAVXNlcnMAAAAGAAAAAQEAAFN0ZWZhbgAABwAAAAEBAABEZXZlbG9wAAcAAAABAQAAUG9wc2hvcAADAAAAAQEAAEFQSQAEAAAAAQEAAHRlc3QHAAAAAQEAAHN1cHBvcnQACgAAAAEBAABtYWRyaWQuanBnAAAgAAAAAQYAABAAAAAgAAAAMAAAAEAAAABQAAAAXAAAAGgAAAB4AAAACAAAAAQDAAAwmAIAAAAAAAgAAAAEAwAAxsQGAAAAAAAIAAAABAMAANtPjwAAAAAACAAAAAQDAADST7QAAAAAAAgAAAAEAwAAGDPoAAAAAAAIAAAABAMAADdr6QAAAAAACAAAAAQDAAA5a+kAAAAAAAgAAAAEAwAARGvpAAAAAAAgAAAAAQYAALQAAADEAAAA1AAAAOQAAAD0AAAABAEAABQBAAAkAQAACAAAAAAEAABBvRkW2wAAABgAAAABAgAAAQAAAAAAAAAPAAAAAAAAAAAAAAAAAAAACAAAAAQDAAAGAAAAAAAAAAQAAAADAwAA9QEAAAgAAAABCQAAZmlsZTovLy8FAAAAAQEAAEJyYWluAAAACAAAAAQDAAAAAIIxdAAAAAgAAAAABAAAQbum5i0AAAAkAAAAAQEAADBEQjhFRUZCLUYwMTMtMzY5Qy1CNUVDLTcwQ0FEQTM3RDhGNxgAAAABAgAAgQAAAAEAAADvEwAAAQAAAAAAAAAAAAAAAQAAAAEBAAAvAAAAAAAAAAEFAADMAAAA\\/v\\/\\/\\/wEAAAAAAAAAEAAAAAQQAACMAAAAAAAAAAUQAAA0AQAAAAAAABAQAABsAQAAAAAAAEAQAABcAQAAAAAAAAIgAAA0AgAAAAAAAAUgAACoAQAAAAAAABAgAAC4AQAAAAAAABEgAADoAQAAAAAAABIgAADIAQAAAAAAABMgAADYAQAAAAAAACAgAAAUAgAAAAAAADAgAABAAgAAAAAAAAHAAACMAQAAAAAAABHAAAAgAAAAAAAAABLAAACcAQAAAAAAABDQAAAEAAAAAAAAAA=="},"identifier":"com.luckymarmot.FileContentDynamicValue"}]</attribute>
         <attribute name="order" type="int64">1</attribute>
-        <attribute name="name" type="string">Upload image to S3</attribute>
+        <attribute name="name" type="string">S3 upload</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z136"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
         <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z182"></relationship>
+    </object>
+    <object type="LMKEYVALUE" id="z184">
+        <attribute name="value" type="string">application/json</attribute>
+        <attribute name="order" type="int64">0</attribute>
+        <attribute name="name" type="string">Content-Type</attribute>
+        <attribute name="enabled" type="bool">1</attribute>
+        <relationship name="groupforbodyparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforheaders" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z185"></relationship>
+    </object>
+    <object type="LMREQUEST" id="z185">
+        <attribute name="uuid" type="string">42B8ED09-5079-4F59-9BEF-62432394DFA0</attribute>
+        <attribute name="url" type="string">[{"data":{"environmentVariable":"9555E0FC-1653-40C2-A330-DA8DC32A4DDB"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/v1\\/images\\/J3znxRA1mbTGvOjWaZ6q"]</attribute>
+        <attribute name="timeoutinterval" type="float">3</attribute>
+        <attribute name="storecookies" type="bool">1</attribute>
+        <attribute name="sendcookies" type="bool">1</attribute>
+        <attribute name="redirectmethod" type="bool">0</attribute>
+        <attribute name="redirectauthorization" type="bool">0</attribute>
+        <attribute name="method" type="string">GET</attribute>
+        <attribute name="followredirects" type="bool">1</attribute>
+        <attribute name="body" type="string"></attribute>
+        <attribute name="order" type="int64">3</attribute>
+        <attribute name="name" type="string">Read</attribute>
+        <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z136"></relationship>
+        <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z184 z186 z187"></relationship>
+    </object>
+    <object type="LMKEYVALUE" id="z186">
+        <attribute name="value" type="string"></attribute>
+        <attribute name="order" type="int64">4</attribute>
+        <attribute name="name" type="string"></attribute>
+        <attribute name="enabled" type="bool">1</attribute>
+        <relationship name="groupforbodyparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforheaders" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z185"></relationship>
+    </object>
+    <object type="LMKEYVALUE" id="z187">
+        <attribute name="value" type="string">[{"data":{"token":"QNX9cLFMpSl4chg+jmOejc8vy2IxGskuq+iGZIYO2yM=","secret":"gyEQHdH8MutpKoVXhjJC79WonfugS8IsQtZNWIpLQzi0y3MeDiP8K3bPc4fEVnxRWZU3Pk41gXV+Zp562iPg3Q=="},"identifier":"com.popshop.PawExtensions.PSAuthDynamicValue"}]</attribute>
+        <attribute name="order" type="int64">1</attribute>
+        <attribute name="name" type="string">Authorization</attribute>
+        <attribute name="enabled" type="bool">1</attribute>
+        <relationship name="groupforbodyparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforheaders" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z185"></relationship>
     </object>
 </database>
