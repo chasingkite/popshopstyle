@@ -1,0 +1,98 @@
+[
+    {
+        "collection": "users",
+        "indexes": [
+            {
+                "field": "username",
+                "unique": true
+            },
+            {
+                "field": "email",
+                "unique": true
+            },
+            {
+                "field": "gender"
+            },
+            {
+                "field": "meta.status"
+            },
+            {
+                "field": "meta.pin"
+            }
+        ]
+    },
+    {
+        "collection": "userSessions",
+        "indexes": [
+            {
+                "field": "token",
+                "unique": true
+            }
+        ]
+    },
+    {
+        "collection": "userFollowees",
+        "indexes": [
+            {
+                "field": "follower"
+            },
+            {
+                "field": "followee"
+            },
+            {
+                "field": ["follower", "followee"],
+                "unique": true
+            }
+        ]
+    },
+    {
+        "collection": "brags",
+        "indexes": [
+            {
+                "field": "author"
+            },
+            {
+                "field": "tags"
+            },
+            {
+                "field": "mentions"
+            },
+            {
+                "field": "location",
+                "type": "2dsphere"
+            },
+            {
+                "field": "meta.status"
+            },
+            {
+                "field": "meta.uploadKey"
+            }
+        ]
+    },
+    {
+        "collection": "comments",
+        "indexes": [
+            {
+                "field": "author"
+            },
+            {
+                "field": "brag"
+            }
+        ]
+    },
+    {
+        "collection": "bragFavorites",
+        "indexes": [
+            {
+                "field": "author"
+            },
+            {
+                "field": "brag"
+            },
+            {
+                "field": ["author", "brag"],
+                "unique": true
+            }
+        ]
+    }
+]

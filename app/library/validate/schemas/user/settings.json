@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "required": [
+        "socialAccounts",
+        "notifications"
+    ],
+    "properties": {
+        "socialAccounts": {
+            "type": "object",
+            "properties": {
+                "google": {
+                    "type": "object",
+                    "required": [
+                        "token",
+                        "autoPost"
+                    ],
+                    "properties": {
+                        "token": {
+                            "type": "string"
+                        },
+                        "autoPost": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "facebook": {
+                    "type": "object",
+                    "required": [
+                        "token",
+                        "autoPost"
+                    ],
+                    "properties": {
+                        "token": {
+                            "type": "string"
+                        },
+                        "autoPost": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "twitter": {
+                    "type": "object",
+                    "required": [
+                        "token",
+                        "autoPost"
+                    ],
+                    "properties": {
+                        "token": {
+                            "type": "string"
+                        },
+                        "autoPost": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
+        "notifications": {
+            "type": "object",
+            "required": [
+                "email",
+                "push"
+            ],
+            "properties": {
+                "email": {
+                    "type": "boolean"
+                },
+                "push": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}

@@ -1,28 +1,54 @@
 {
-  "name": "popshopstyle",
-  "version": "0.1.0",
-  "description": "popshopstyle nodejs",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "ejs": "2.3.3",
-    "express": "4.13.3",
-    "jade": "^1.11.0"
-  },
-  "engines": {
-    "node": "0.12.7"
+  "name": "API",
+  "version": "1.0.0",
+  "description": "The PopShop API",
+  "author": {
+    "name": "Stefan Aichholzeer",
+    "email": "play@analogbird.com",
+    "url": "http://about.me/aichholzer"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hnguyen417/popshopstyle.git"
+    "url": "git@bitbucket.org:analogbird/popshop.api.git"
   },
-  "keywords": [
-    "node",
-    "heroku",
-    "express",
-    "popshopstyle"
-  ],
-  "license": "MIT"
+  "engines": {
+    "node": "6.0.x"
+  },
+  "private": true,
+  "main": "app/index.js",
+  "dependencies": {
+    "ajv": "^4.1.3",
+    "aws-sdk": "^2.4.0",
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "express": "^4.14.0",
+    "fb": "^1.1.1",
+    "flat": "^2.0.0",
+    "hashids": "^1.0.2",
+    "mandrill-api": "^1.0.45",
+    "moment": "^2.13.0",
+    "mongoose": "^4.5.1",
+    "node-uuid": "^1.4.7",
+    "redis": "^2.6.2",
+    "serve-favicon": "^2.3.0",
+    "striptags": "^2.1.1"
+  },
+  "devDependencies": {
+    "async": "^2.0.0-rc.6",
+    "dotenv": "^2.0.0",
+    "faker": "^3.1.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-nodemon": "^0.4.2",
+    "jscs": "^3.0.4",
+    "mocha": "^2.5.3",
+    "request": "^2.72.0",
+    "rosie": "^1.6.0"
+  },
+  "scripts": {
+    "start": "node app/",
+    "hint": "grunt hint",
+    "test": "grunt test"
+  }
 }

@@ -1,0 +1,32 @@
+{
+    "400": {
+        "10": "You have reached your request limit for today.",
+        "11": "The provided header is not valid.",
+        "12": "The provided body is not valid.",
+        "15": "The provided username is already in use.",
+        "16": "The provided username is either too short or too long. We expect min. 5 and max. 32 characters.",
+        "17": "The provided email address is not valid.",
+        "18": "The provided email address is already in use.",
+        "19": "The provided avatar URI is not valid.",
+        "20": "The provided website URI is not valid.",
+        "23": "The provided date of birth is not valid.",
+        "26": "A social network account error has occurred."
+    },
+    "401": {
+        "10": "The provided email address is not valid.",
+        "11": "The provided username is not valid."
+    },
+    "403": {
+        "10": "The provided authorization is not valid.",
+        "11": "The provided time offset is not valid.",
+        "12": "The provided signature is not valid."
+    },
+    "404": {
+        "10": "The requested resource could not be found.",
+        "11": "The requested user could not be found.",
+        "12": "The requested image could not be found."
+    },
+    "500": {
+        "10": "An unexpected error has occurred, we are on it!"
+    }
+}
